@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ki Zani Ki Ase !!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .page {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        .bg1 { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
+        .bg2 { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+        .bg3 { background: linear-gradient(135deg, #fbc2eb, #a6c1ee); }
+        .bg-quiz { background: linear-gradient(135deg, #84fab0, #8fd3f4); }
+        .bg-final { background: linear-gradient(135deg, #667eea, #764ba2); }
+
+        .title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #ff4d6d;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: .3s;
+            font-weight: 600;
+        }
+
+        .yes {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        .no {
+            background: #666;
+            color: white;
+            position: absolute;
+            transition: 0.1s;
+        }
+
+        .next-btn {
+            background: #4CAF50;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .quiz-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            color: #333;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background: #f0f0f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            background: #ff4d6d;
+            color: white;
+        }
+
+        .gif {
+            width: 180px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        video {
+            width: 90%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .falling {
+            position: fixed;
+            top: -40px;
+            font-size: 24px;
+            animation: fall linear infinite;
+            z-index: 1000;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="TDP.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="page active bg1" id="page1">
+        <img class="gif" src="https://media.tenor.com/x9NDP4s0PigAAAAi/peach-cat-peachy.gif">
+        <div class="title">Ekta sundor jinish tomake dekhabo..</div>
+        <div class="subtitle">Dekhba? 😍</div>
+        <div style="height: 100px; width: 100%; display: flex; justify-content: center; align-items: center;">
+            <button class="yes" onclick="startExperience()">Yes ❤️</button>
+            <button class="no" id="noBtn">No 😒</button>
+        </div>
+    </div>
+
+    <div class="page bg2" id="page2">
+        <img class="gif" src="https://media.tenor.com/TKmNZjp_He0AAAAj/lovely-romantic.gif">
+        <div class="title">Happy Propose Day Dear! 💍</div>
+        <div class="subtitle">
+            Hehe ami to zantam you will accept!<br>
+            Tai to tumi NO te click na kore YES click korso.<br>
+            Ah kize valo lagteseeeeee! 🥰
+        </div>
+        <button class="next-btn" onclick="goPage(3)">Next Page এ চলো ➡️</button>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="page bg-quiz" id="page8">
+        <div class="title">Video ta dekho.. 🎬</div>
+        <video id="video1" controls>
+            <source src="Dipjol.mp4" type="video/mp4">
+        </video>
+        <button class="next-btn" onclick="goPage('extra')">Ar ektu ase 😂 ➡️</button>
+    </div>
+
+    <div class="page bg-quiz" id="pageextra">
+        <div class="title">Shei na! 😂</div>
+        <video id="video2" controls>
+            <source src="Dipjol2.mp4" type="video/mp4">
+        </video>
+        <button class="next-btn" onclick="goPage(9)">Ebar Next ❤️</button>
+    </div>
+
+    <div class="page bg3" id="page9">
+        <div class="title">Heheheh ❤️</div>
+        <div style="display: flex; gap: 10px;">
+            <img class="gif" style="width: 120px;" src="https://media.tenor.com/iA_pbov0m2kAAAAi/cat-by-ednastochi.gif">
+            <img class="gif" style="width: 120px;" src="https://media.tenor.com/6jaDm2Pv6dUAAAAi/dare-aggie-dare-aggie-bunny.gif">
+        </div>
+        <p class="subtitle" style="font-style: italic; background: rgba(255,255,255,0.5); padding: 15px; border-radius: 10px;">
+            "Kasoor aankhon ka hota hai, tadapna dil ko padta hai,<br>
+            Bahut dino se dil mein ek baat thi...<br>
+            Aaj kehna chahta hoon,<br>
+             Mujhe tumse bahut zyada pyaar hai!" 😉<br>
+            - Ovi😙
+        </p>
+        <button class="next-btn" onclick="goPage(10)">Final Step ➡️</button>
+    </div>
+
+    <div class="page bg-final" id="page10">
+        <div class="title">Dhoirzo Dhore Dekhar Jonno Thank You 🤭</div>
+        <div class="subtitle" style="color: white;">Khub Valo Lagtese 🫣</div>
+        <img class="gif" src="https://media1.tenor.com/m/qR1sGRNmfqsAAAAC/besito-catlove.gif">
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+
+        function startExperience() {
+            music.play();
+            goPage(2);
+        }
+
+        function goPage(n) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const targetId = (typeof n === 'number') ? 'page' + n : 'page' + n;
+            document.getElementById(targetId).classList.add('active');
+
+            // ভিডিও পেজ চেক (পেজ ৮ এবং এক্সট্রা)
+            if (targetId === 'page8' || targetId === 'pageextra') {
+                music.pause(); // অডিও থামিয়ে দাও
+            } else {
+                if (music.paused && music.currentTime > 0) {
+                    music.play(); // অন্য পেজে আসলে অডিও যেখান থেকে থেমেছিল সেখান থেকে শুরু হবে
+                }
+            }
+        }
+
+        const noBtn = document.getElementById("noBtn");
+        noBtn.addEventListener("mouseover", () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        });
+
+        const quizzes = [
+            { q: "Kemon Lagtese?", options: ["Valo", "Kharap", "MOtamoti", "Best"] },
+            { q: "You accepted! Tai na?", options: ["(a) YES", "(b) Obviously", "(c) a", "(d) both a & b"] },
+            { q: "Ager qns ta shei silo na?", options: ["Koise tomare", "Oneekkkkk", "Zani na", "😒"] },
+            { q: "Ovi cheleta valo na?", options: ["E ki r bolte", "Oshomvob Rokom", "Yeah Yeah Yeah", "Obosooi"] },
+            { q: "Qns gula kemon silo?", options: ["Shei", "Dhur", "Marattok", "Osthir"] }
+        ];
+
+        const container = document.getElementById('quizContainer');
+        quizzes.forEach((quiz, index) => {
+            const pageNum = index + 3;
+            const quizHtml = `
+                <div class="page bg-quiz" id="page${pageNum}">
+                    <div class="quiz-card">
+                        <h3>Question ${index + 1}</h3><br>
+                        <p>${quiz.q}</p><br>
+                        ${quiz.options.map(opt => `<div class="option" onclick="goPage(${pageNum + 1})">${opt}</div>`).join('')}
+                    </div>
+                </div>
+            `;
+            container.innerHTML += quizHtml;
+        });
+
+        setInterval(() => {
+            const el = document.createElement("div");
+            el.className = "falling";
+            const items = ["🌹", "❤️", "🍫", "✨"];
+            el.innerHTML = items[Math.floor(Math.random() * items.length)];
+            el.style.left = Math.random() * 100 + "vw";
+            el.style.animationDuration = (4 + Math.random() * 3) + "s";
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 6000);
+        }, 300);
+    </script>
+</body>
+
+</html>
